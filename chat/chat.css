@@ -1,0 +1,69 @@
+.sender {
+    align-self: end;
+}
+
+.receiver {
+    align-self: start;
+}
+
+section {
+    border-radius: 10px;
+    background-color: var(--forground-color-secondary);
+    padding: 10px 20px;
+}
+
+main {
+    margin: 10px 10%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    background-color: var(--forground-color);
+    padding: 20px 10px;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.send_message_contenair {
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+    background-color: var(--input-color);
+    border-radius: 10px;
+    border: none;
+    padding: 5px;
+    box-sizing: border-box;
+    color: white;
+    transition-duration: 500ms;
+}
+
+input:hover,
+input:active,
+.send_message_contenair:hover,
+.send_message_contenair:hover input,
+.send_message_contenair:active {
+    background-color: var(--input-color-hover);
+}
+
+input {
+    height: 100%;
+    width: 100%;
+    background-color: var(--input-color);
+    border-radius: 10px;
+    margin-top: 0;
+    border: none;
+    padding: 5px;
+    box-sizing: border-box;
+    color: white;
+    margin: 0;
+    transition-duration: 500ms;
+    height: 100%;
+}
+
+input:focus-visible {
+    outline: none;
+}
+
+#send-logo {
+    height: 30px;
+    cursor: pointer;
+}

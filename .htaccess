@@ -1,0 +1,7 @@
+ErrorDocument 404 /404.php
+
+RewriteEngine On
+
+RewriteRule ^book/(.*)$ book/index.php?title=$1 [L,QSA]
+
+RewriteRule ^user/(.*)$ user/index.php?username=$1 [L,QSA]
