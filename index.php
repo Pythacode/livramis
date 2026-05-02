@@ -14,9 +14,9 @@ function slugify($text) {
 <head>
     <meta charset="UTF-8">
     <title>Livramis</title>
-    <link rel="stylesheet" href="./res/css/index.css">
-    <link rel="stylesheet" href="./home.css">
-    <link rel="icon" type="image/png" href="./res/img/logo/square_logo.png">
+    <link rel="stylesheet" href="/res/css/index.css">
+    <link rel="stylesheet" href="/res/css/home.css">
+    <link rel="icon" type="image/png" href="/res/img/logo/square_logo.png">
 </head>
 <!-- Inclusion du fichier HTML header -->
 <?php
@@ -86,6 +86,6 @@ $books = $sql_request->fetchAll(PDO::FETCH_ASSOC);
         }
     ?>
 </div>
-<script src="./home.js" defer></script>
+<script src="/res/js/home.js" defer></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 .center {
     display: flex;
     align-items: center;
+    text-align: center;
     flex-direction: column;
     margin : 15px 25%;
     background-color: var(--forground-color);
@@ -11,4 +12,5 @@
 .center h1#title {
     font-size: 500%;
     margin-bottom: 0;
+    text-align: center;
 }
