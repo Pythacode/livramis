@@ -13,14 +13,16 @@
                 <ul>
                     <hr>
                     <a href="/" class="no-style"><li>Toutes</li></a>
-                    <hr>
-                    <a href="/?categorie=Romans" class="no-style"><li>Romans</li></a>
-                    <hr>
-                    <a href="/?categorie=BDs" class="no-style"><li>BDs</li></a>
-                    <hr>
-                    <a href="/?categorie=Mangas" class="no-style"><li>Mangas</li></a>
-                    <hr>
-                    <a href="/?categorie=Livres_scolaires" class="no-style"><li>Livres scolaires</li></a>
+                    <?php
+
+                    $categories = get_categories();
+
+                    foreach($categories as $categorie) {
+                        echo "<hr>";
+                        echo '<a href="/?categorie=' . $categorie['name'] . '" class="no-style"><li>' . $categorie['name'] . '</li></a>';
+                    }
+
+                    ?>
                 </ul>
             </div>
         </div>
