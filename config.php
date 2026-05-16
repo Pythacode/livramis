@@ -15,8 +15,6 @@ if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 
 $_SESSION['LAST_ACTIVITY'] = time(); // Met à jour l'activité
 */
 
-echo 'Test deploy';
-
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Symfony\Component\Yaml\Yaml;
