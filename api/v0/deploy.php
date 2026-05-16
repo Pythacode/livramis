@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/config.php";
 
-define('SECRET', $data['deploy-key']);
+define('SECRET', $config['deploy-key']);
 define('REPO_PATH', $_SERVER['DOCUMENT_ROOT']);
 define('BRANCH', 'main');
 
