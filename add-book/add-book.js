@@ -7,8 +7,8 @@ document.getElementById("image").addEventListener("change", function (event) {
     if (file) {
         let fileSize = file.size / 1024; // Taille en Ko
 
-        if (fileSize > 100) {
-            alert("Le fichier est trop grand ! (Max : 100 Ko)");
+        if (fileSize > 250) {
+            alert("Le fichier est trop grand ! (Max 250 Ko)");
             this.value = "";
             return;
         }

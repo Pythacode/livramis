@@ -133,3 +133,8 @@ a.no-style {
     text-decoration: none; 
     color: inherit;
 }
+
+.line-logo {
+    height: 100px;
+    padding: 10px 0;
+}

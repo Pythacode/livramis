@@ -52,6 +52,7 @@ $books = $sql_request->fetchAll(PDO::FETCH_ASSOC);
         if (empty($books)) {
             echo "Aucun livre trouvé :/";
         }
+        usort($books, fn($a, $b) => strcmp($a['title'], $b['title']));
         foreach($books as $book) {
             $book_link = "/book/" . slugify($book["title"]) . "-" . $book["id"];
             $sql_request = $bdd->prepare("SELECT * FROM `users` WHERE id = :id");
@@ -80,20 +81,7 @@ $books = $sql_request->fetchAll(PDO::FETCH_ASSOC);
                 <p class="book-url"><?php echo $book_link; ?></p>
                 <div class="book-conteneur">
                     <a href="<?php echo $book_link; ?>">
-                        <?php
-                        if ($book["have_picture"]) {
-                            ?>
-                            <img class="couverture" src="<?php echo "./books/".$book["id"]."/couverture.jpg" ?>" alt="">
-                            <?php
-                        } else {
-                            ?>
-                            <div>
-                                Pas de couverture
-                                <?php echo implode(", ", $book) ?>
-                            </div>
-                            <?php
-                        }
-                        ?>
+                        <img class="couverture" src="<?php echo $book["have_picture"] ? "./books/".$book["id"]."/couverture.jpg" : "./books/default/" . $book_categorie . ".png"; ?>" alt="">
                     </a>
                     <div>
                         <a class="invisible" href="<?php echo $book_link; ?>"><h2 class="title"><?php echo $book["title"]; ?></h2></a>

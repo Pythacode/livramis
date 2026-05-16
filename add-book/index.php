@@ -84,7 +84,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql_request->execute();
 
     if (!($_FILES['image']['size']==0)) { // Il y a une image
-        echo "Image il y a";
         $file_tmp = $_FILES['image']['tmp_name'];
         $file_name = pathinfo($_FILES['image']['name'], PATHINFO_FILENAME);
         $file_ext = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
