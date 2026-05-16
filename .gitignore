@@ -1,1 +1,5 @@
 config.yaml
+books/*
+!books/default
+users/*
+!users/default

@@ -1,5 +1,5 @@
 <?php
-require_once './../config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . "/config.php";
 
 if (!isset($_SESSION['id'])) {
     header('Location: /login/?redirect=/add-book');
