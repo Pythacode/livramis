@@ -23,7 +23,7 @@ $config = Yaml::parseFile(__DIR__ . '/config.yaml');
 
 
 try {
-    $bdd = new PDO("mysql:host=" . $config['host'] . ";dbname=" . $config['dbname'] . ";charset=utf8;", $config['username'], $config['password']);
+    $bdd = new PDO("mysql:host=" . $config['dbhost'] . ";dbname=" . $config['dbname'] . ";charset=utf8;", $config['dbusername'], $config['dbpassword']);
     $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Erreur de connexion : " . $e->getMessage());
