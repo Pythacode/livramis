@@ -3,3 +3,4 @@ books/*
 !books/default
 users/*
 !users/default
+vendor/
