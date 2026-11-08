@@ -1,6 +1,11 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/config.php";
 
+require $_SERVER['DOCUMENT_ROOT'] . '/composants/renderer.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/composants/header/Header.php';
+
+$header = new Header(get_categories(), isset($_SESSION['id']));
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $username = htmlspecialchars($_POST["username"]);
@@ -30,10 +35,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <title>Inscription - Livramis</title>
             <link rel="stylesheet" href="/res/css/index.css">
             <link rel="icon" type="image/png" href="/res/img/logo/square_logo.png">
+            <?= Renderer::style(); ?>
         </head>
         <body>
-            <?php include "./../res/html/header.html"; ?>
-            <?php include "signin.html"; ?>
+            <?= $header ?>
+            <div class="container">
+                <link rel="stylesheet" href="/res/css/form.css">
+                <h1>Inscription à Livramis</h1>
+                <h2>Veuillez remplir les champs si-dessous</h2>
+
+                <form action="/signin/" method="post" id="signin">
+                    <p id="error"></p>
+                    <script src="signin.js"></script>
+                    <label for="username">Nom d'utilisateur</label>
+                    <input type="text" name="username" id="username">
+                    <label for="first-name">Prénom</label>
+                    <input type="text" name="first-name" id="first-name">
+                    <label for="last-name">Nom</label>
+                    <input type="text" name="last-name" id="last-name">
+                    <label for="email">Adresse mail</label>
+                    <input type="email" name="email" id="email">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" name="password" id="password">
+                    <label for="confirm-password">Confirmer le mot de passe</label>
+                    <input type="password" name="confirm-password" id="confirm-password">
+                    <input type="submit" value="S'inscrire">
+                </form>
+
+            </div>
         </body>
         </html>
         <?php
@@ -85,10 +114,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <title>Inscription - Livramis</title>
         <link rel="stylesheet" href="/res/css/index.css">
         <link rel="icon" type="image/png" href="/res/img/logo/square_logo.png">
+        <?= Renderer::style(); ?>
     </head>
     <body>
-        <?php include "./../res/html/header.html"; ?>
-        <?php include "signin.html"; ?>
+        <?= $header ?>
+        <div class="container">
+            <link rel="stylesheet" href="/res/css/form.css">
+            <h1>Inscription à Livramis</h1>
+            <h2>Veuillez remplir les champs si-dessous</h2>
+
+            <form action="/signin/" method="post" id="signin">
+                <p id="error"></p>
+                <script src="signin.js"></script>
+                <label for="username">Nom d'utilisateur</label>
+                <input type="text" name="username" id="username">
+                <label for="first-name">Prénom</label>
+                <input type="text" name="first-name" id="first-name">
+                <label for="last-name">Nom</label>
+                <input type="text" name="last-name" id="last-name">
+                <label for="email">Adresse mail</label>
+                <input type="email" name="email" id="email">
+                <label for="password">Mot de passe</label>
+                <input type="password" name="password" id="password">
+                <label for="confirm-password">Confirmer le mot de passe</label>
+                <input type="password" name="confirm-password" id="confirm-password">
+                <input type="submit" value="S'inscrire">
+            </form>
+
+        </div>
     </body>
     </html>
     <?php

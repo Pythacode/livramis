@@ -1,5 +1,4 @@
 <header>
-    <link rel="stylesheet" href="/res/css/header.css">
     <img src="/res/img/logo/line_logo.png" alt="Logo Livrami" class="line-logo">
 </header>
 <nav>
@@ -13,16 +12,7 @@
                 <ul>
                     <hr>
                     <a href="/" class="no-style"><li>Toutes</li></a>
-                    <?php
-
-                    $categories = get_categories();
-
-                    foreach($categories as $categorie) {
-                        echo "<hr>";
-                        echo '<a href="/?categorie=' . $categorie['name'] . '" class="no-style"><li>' . $categorie['name'] . '</li></a>';
-                    }
-
-                    ?>
+                    {{categories}}
                 </ul>
             </div>
         </div>
@@ -87,19 +77,7 @@
                 Mon compte
                 <ul>
                     <hr>
-                <?php
-                if (!isset($_SESSION['id'])) {
-                    ?>
-                        <a class="no-style" href="/login"><li>Se connecter</li></a>
-                        <a class="no-style" href="/signin"><li>S'inscrire</li></a>
-                    <?php
-                } else {
-                    ?>
-                        <a class="no-style" href="/profil"><li>Mon profil</li></a>
-                        <a class="no-style" href="/logout"><li>Déconnection</li></a>
-                    <?php
-                }
-                ?>
+                    {{compte}}
                 </ul>
             </div>
         </div>

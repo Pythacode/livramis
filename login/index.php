@@ -1,6 +1,10 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/config.php";
 
+require $_SERVER['DOCUMENT_ROOT'] . '/composants/renderer.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/composants/header/Header.php';
+
+$header = new Header(get_categories(), isset($_SESSION['id']));
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -60,10 +64,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Connection Livramis</title>
     <link rel="stylesheet" href="/res/css/index.css">
     <link rel="icon" type="image/png" href="/res/img/logo/square_logo.png">
+    <script src="/res/js/login.js" defer></script>
+    <?= Renderer::style(); ?>
 </head>
 <body>
-    <?php include "./../res/html/header.html"; ?>
-    <?php include "login.html"; ?>
+    <?= $header ?>
+    <div class="container">
+        <link rel="stylesheet" href="/res/css/form.css">
+        <h1>Connection à Livramis</h1>
+        <h2>Veuillez remplir les champs si-dessous</h2>
+
+        <form action="/login/" method="post" id="login">
+            <p id="error"></p>
+            <label for="username">Nom d'utilisateur</label>
+            <input type="text" name="username" id="username">
+            <label for="password">Mot de passe</label>
+            <input type="password" name="password" id="password">
+            <input type="hidden" name="redirect" value="<?php echo isset($_GET['redirect']) ? htmlspecialchars($_GET['redirect']) : '/'; ?>">
+            <input type="submit" value="Se connecter">
+        </form>
+    </div>
 </body>
 </html>
 <?php

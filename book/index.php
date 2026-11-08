@@ -1,6 +1,11 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/config.php";
 
+require $_SERVER['DOCUMENT_ROOT'] . '/composants/renderer.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/composants/header/Header.php';
+
+$header = new Header(get_categories(), isset($_SESSION['id']));
+
 $id = explode("-", $_GET["title"]);
 $id = end($id);
 
@@ -67,9 +72,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
         <link rel="stylesheet" href="/res/css/book.css">
         <script src="/res/js/book.js" defer></script>
         <title><?php echo $book["title"] ?> - Livramis</title>
+        <?= Renderer::style(); ?>
     </head>
     <body>
-        <?php include "./../res/html/header.html"; ?>
+        <?= $header ?>
         <div class="book">
             <img class="couverture" src="<?php echo $book["have_picture"] ? "./../books/".$book["id"]."/couverture.jpg" : "./../books/default/couverture.jpg"; ?>" alt="Couverture de <?php echo $book["title"] ?>">
             
