@@ -35,37 +35,24 @@ $DB_PASS = $_ENV["DB_PASS"];
 $DB_PORT = $_ENV["DB_PORT"];
 
 try {
-    $conn = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME, $DB_PORT);
-    $conn->set_charset('utf8mb4');
+    $bdd = new PDO(
+        "mysql:host=$DB_HOST;port=$DB_PORT;dbname=$DB_NAME;charset=utf8mb4",
+        $DB_USER,
+        $DB_PASS,
+        [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ]
+    );
 } catch (PDOException $e) {
     die("Erreur de connexion : " . $e->getMessage());
-};
-
-function rrmdir($src) {
-    $dir = opendir($src);
-    while(false !== ( $file = readdir($dir)) ) {
-        if (( $file != '.' ) && ( $file != '..' )) {
-            $full = $src . '/' . $file;
-            if ( is_dir($full) ) {
-                rrmdir($full);
-            }
-            else {
-                unlink($full);
-            }
-        }
-    }
-    closedir($dir);
-    rmdir($src);
 }
 
 function get_categories() {
     global $bdd;
-
-    $sql_request = $bdd->prepare("SELECT `name` FROM `categories`");
-    $sql_request->execute();
-    $categories = $sql_request->fetchAll(PDO::FETCH_ASSOC);
-
-    return $categories;
+    $sql = $bdd->prepare("SELECT `name` FROM `categories`");
+    $sql->execute();
+    return $sql->fetchAll(); // FETCH_ASSOC déjà par défaut
 }
 
 ?>
