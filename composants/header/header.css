@@ -117,7 +117,7 @@ hr {
     height: 40px;
 }
 
-.profile_picture {
+nav .profile_picture {
     border: 1px solid var(--main-clair-color);
     z-index: 501;
 }
