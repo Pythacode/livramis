@@ -34,10 +34,9 @@ $DB_USER = $_ENV["DB_USER"];
 $DB_PASS = $_ENV["DB_PASS"];
 $DB_PORT = $_ENV["DB_PORT"];
 
-
 try {
-    $bdd = new PDO("mysql:host=" . $config['dbhost'] . ";dbname=" . $config['dbname'] . ";charset=utf8;", $config['dbusername'], $config['dbpassword']);
-    $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn = new mysqli($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME, $DB_PORT);
+    $conn->set_charset('utf8mb4');
 } catch (PDOException $e) {
     die("Erreur de connexion : " . $e->getMessage());
 };
