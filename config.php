@@ -55,4 +55,16 @@ function get_categories() {
     return $sql->fetchAll(); // FETCH_ASSOC déjà par défaut
 }
 
+function startswithAVoyelle(string $mot): bool
+{
+    return preg_match('/^[aeiouyàâäéèêëîïôöùûü]/i', $mot);
+}
+
+function slugify($text) {
+    $text = strtolower($text); // Minuscule
+    $text = preg_replace('/[^a-z0-9]+/', '-', $text); // Remplace les caractères spéciaux par "-"
+    $text = trim($text, '-'); // Supprime les "-" en début/fin
+    return $text;
+}
+
 ?>

@@ -85,3 +85,18 @@ input:active,
         transform: rotate(360deg);
     }
 }
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 2px solid black;
+}
+
+.divider {
+    display: flex; 
+    align-items: center;
+    margin: 15px 0;
+    font-size: 14px;
+    gap: 5px;
+}

@@ -1,12 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . "/config.php";
 
-function slugify($text) {
-    $text = strtolower($text); // Minuscule
-    $text = preg_replace('/[^a-z0-9]+/', '-', $text); // Remplace les caractères spéciaux par "-"
-    $text = trim($text, '-'); // Supprime les "-" en début/fin
-    return $text;
-}
 ?>
 
 <!DOCTYPE html>

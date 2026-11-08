@@ -16,14 +16,22 @@ $user = $sql_request->fetch(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <title>Connection Livramis</title>
     <link rel="stylesheet" href="/res/css/index.css">
-    <link rel="icon" type="image/png" href="/res/img/logo/square_logo.png">
+    <link rel="stylesheet" href="/res/css/user.css">
+    <link rel="stylesheet" href="/res/css/home.css">
+    <title><?php echo $user["username"] ?> - Livramis</title>
 </head>
 
 <body>
 <?php
 include "./../res/html/header.html"; 
 if ($user) {
-    echo $user["id"];
+    $name = $user["username"];
+    $sql_request = $bdd->prepare("SELECT * FROM `books` where `user_id` = :user_id");
+    $sql_request->execute([':user_id' => $user['id']]);
+    $sql_request->execute();
+    $books = $sql_request->fetchAll(PDO::FETCH_ASSOC);
+
+    include "index.html";
 } else {
     ?>
 
