@@ -1,0 +1,23 @@
+<div class="book">
+    <p class="book-url"><%= book.link %></p>
+    <div class="book-conteneur">
+        <a href="<%= book.link %>">
+            <img class="couverture" src="<%= book.poster %>" alt="Couverture du livre">
+        </a>
+        <div>
+            <a class="invisible" href="<%= book.link %>"><h2 class="title"><%= book.title %></h2></a>
+            <h3 class="author"><%= book.author %></h3>
+            <hr>
+            <div class="infos">
+                    <h3 class="info">Catégorie : <%= book.categorie %></h3>
+                    <h3  class="info">Disponibilité : <%= book.state %></h3>
+                    
+                        <h3  class="info">Propriétaire : <a class="no-opened" href="/user/<%= book.proprietaire %>"><%= book.proprietaire %></a>
+                        </h3>
+                    
+                    <h2>Synopsis :</h2>
+                    <div><%- book.synopsis %></div>
+            </div>
+        </div>
+    </div>
+</div>

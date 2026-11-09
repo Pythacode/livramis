@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Livramis</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/book.css">
+</head>
+<%- include('partials/header', { categories: categories }) %>
+<body>
+<div class="books">
+    <% books.forEach(book => { %>
+      <%- include('partials/book', { book: book }) %>
+    <% }); %>
+
+    <% if (books.length === 0) { %>
+      <p>Aucun livre trouvé.</p>
+    <% } %>
+  </main>
+</div>
+<script src="js/home.js" defer></script>
+</body>
+</html>

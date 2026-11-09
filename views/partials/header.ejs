@@ -12,7 +12,9 @@
                 <ul>
                     <hr>
                     <a href="/" class="no-style"><li>Toutes</li></a>
-                    {{categories}}
+                    <% categories.forEach(categorie => { %>
+                        <a href="/?categorie=<%= encodeURI(categorie?.name) %>" class="no-style"><li><%= categorie?.name %></li></a>
+                    <% }); %>
                 </ul>
             </div>
         </div>

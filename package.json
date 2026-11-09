@@ -2,13 +2,13 @@
   "name": "livramis",
   "version": "0.0.1",
   "description": "Une bibliothèque partagé",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Nathanaëlle <contact@nathanaelle.org>",
-  "license": "ISC",
+  "license": "CC-BY-NC-4.0",
   "dependencies": {
     "axios": "^1.21.1",
     "connect-redis": "^10.0.0",
@@ -19,5 +19,14 @@
     "multer": "^2.5.0",
     "mysql2": "^3.24.6",
     "redis": "^6.3.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pythacode/livramis.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Pythacode/livramis/issues"
+  },
+  "homepage": "https://livramis.nathanaelle.org",
+  "devDependencies": {}
 }
