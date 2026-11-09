@@ -1,0 +1,23 @@
+{
+  "name": "livramis",
+  "version": "0.0.1",
+  "description": "Une bibliothèque partagé",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Nathanaëlle <contact@nathanaelle.org>",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.21.1",
+    "connect-redis": "^10.0.0",
+    "dotenv": "^18.0.10",
+    "ejs": "^7.0.2",
+    "express": "^5.3.0",
+    "express-session": "^1.19.0",
+    "multer": "^2.5.0",
+    "mysql2": "^3.24.6",
+    "redis": "^6.3.1"
+  }
+}

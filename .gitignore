@@ -1,7 +1,2 @@
-config.yaml
-books/*
-!books/default
-users/*
-!users/default
-vendor/
+node_modules
 .env
