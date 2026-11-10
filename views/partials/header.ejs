@@ -1,8 +1,8 @@
 <header>
-    <img src="img/logo/line_logo.png" alt="Logo Livrami" class="line-logo">
+    <img src="/img/logo/line_logo.png" alt="Logo Livrami" class="line-logo">
 </header>
 <nav>
-    <div class="logo"><a class="no-style" href="/"><img src="img/logo/square_logo.png" alt="Logo Livrami" class="logo_picture"></a></div>
+    <div class="logo"><a class="no-style" href="/"><img src="/img/logo/square_logo.png" alt="Logo Livrami" class="logo_picture"></a></div>
     <div>
         <div class="nav-button">
             <div class="text">
@@ -79,7 +79,13 @@
                 Mon compte
                 <ul>
                     <hr>
-                    {{compte}}
+                     <% if (user) { %>
+                        <a class="no-style" href="/not-dev.php"><li>Mon profil</li></a>
+                        <a class="no-style" href="/logout"><li>Déconnection</li></a>
+                    <% } else { %>
+                        <a class="no-style" href="/login"><li>Se connecter</li></a>
+                        <a class="no-style" href="/signin"><li>S'inscrire</li></a>
+                     <% } %>
                 </ul>
             </div>
         </div>

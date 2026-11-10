@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Connection - Livramis</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/form.css">
+</head>
+<%- include('../partials/header') %>
+<body>
+  <div class="container">
+        <h1>Connection à Livramis</h1>
+        <h2>Veuillez remplir les champs ci-dessous</h2>
+
+        <form action="/login/" method="post" id="login">
+            <p id="error"><%= typeof error !== 'undefined' ? error : '' %></p>
+            <label for="username">Nom d'utilisateur</label>
+            <input type="text" name="username" id="username">
+            <label for="password">Mot de passe</label>
+            <input type="password" name="password" id="password">
+            <!-- En cours de portage <input type="hidden" name="redirect" value="<?php echo isset($_GET['redirect']) ? htmlspecialchars($_GET['redirect']) : '/'; ?>">-->
+            <input type="submit" value="Se connecter">
+        </form>
+    </div>
+    <script src="/js/login.js"></script>
+</body>
+</html>

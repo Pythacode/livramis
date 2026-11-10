@@ -8,18 +8,17 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/book.css">
 </head>
-<%- include('partials/header', { categories: categories }) %>
+<%- include('partials/header') %>
 <body>
-<div class="books">
-    <% books.forEach(book => { %>
-      <%- include('partials/book', { book: book }) %>
-    <% }); %>
+  <div class="books">
+      <% books.forEach(book => { %>
+        <%- include('partials/book', { book: book }) %>
+      <% }); %>
 
-    <% if (books.length === 0) { %>
-      <p>Aucun livre trouvé.</p>
-    <% } %>
-  </main>
-</div>
+      <% if (books.length === 0) { %>
+        <p>Aucun livre trouvé.</p>
+      <% } %>
+  </div>
 <script src="js/home.js" defer></script>
 </body>
 </html>

@@ -11,6 +11,7 @@
   "license": "CC-BY-NC-4.0",
   "dependencies": {
     "axios": "^1.21.1",
+    "bcryptjs": "^3.0.3",
     "connect-redis": "^10.0.0",
     "dotenv": "^18.0.10",
     "ejs": "^7.0.2",
@@ -27,6 +28,5 @@
   "bugs": {
     "url": "https://github.com/Pythacode/livramis/issues"
   },
-  "homepage": "https://livramis.nathanaelle.org",
-  "devDependencies": {}
+  "homepage": "https://livramis.nathanaelle.org"
 }

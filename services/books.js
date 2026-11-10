@@ -1,5 +1,5 @@
-const pool = require('../config/database');
 const categories = require('./categories')
+const pool = require('../config/database');
 
 class BookService {
   constructor(pool) {
