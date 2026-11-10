@@ -1,4 +1,5 @@
 const categories = require('./categories')
+const authors = require('./author')
 const pool = require('../config/database');
 
 class BookService {
@@ -36,32 +37,42 @@ class BookService {
     book["categorie"] = categorie;
 
     // Link
-    book["link"] = "/book/" + encodeURI(book["title"]) + "-" + book["id"];
+    book["link"] = "/book/" + book["slug"];// + "-" + book["id"];
 
     // Poster
-    book['poster'] = book["have_picture"] ? "/books/" + book["id"] + "/couverture.jpg" : "/books/default/" + categorie + ".png";
-    
+    book['poster'] = book["have_picture"] ? `/books/couverture_${book.id}.jpg` : "/books/default/" + categorie + ".png";
+
+    book['author'] = authors.getAuthorById(book['author_id'])
+
     return book;
   }
 
-  // Récupérer tous les livres
   async getBooks(categorie) {
     try {
-      let sql = 'SELECT * FROM books ORDER BY title ASC'
+      let sql = `SELECT b.*, a.name AS author_name
+        FROM books b
+        LEFT JOIN authors a ON a.id = b.author_id
+        ORDER BY b.title ASC
+      `
       let params = []
 
       if (categorie) {
         const categorieId = (await categories.getCategorieIdByName(categorie))?.id;
         if (categorieId) {
-          sql = 'SELECT * FROM books WHERE categorie = ? ORDER BY title ASC'
+          sql = `
+            SELECT b.*, a.name AS author_name
+            FROM books b
+            LEFT JOIN authors a ON a.id = b.author_id
+            WHERE b.categorie = ?
+            ORDER BY b.title ASC
+          `
           params = [categorieId]
         }
       }
       const [rows] = await pool.query(sql, params);
 
       for (const book of rows) {
-        const processed = await this.book_process(book);
-        book.title = processed.title;
+        await this.book_process(book);
       }
 
       return rows;
@@ -71,15 +82,80 @@ class BookService {
     }
   }
 
-  // Récupérer un livre par ID
-  async getBookById(id) {
+  async getBookByProprietaire(id) {
     try {
-      const [rows] = await pool.query('SELECT * FROM books WHERE id = ?', [id]);
+      const [rows] = await pool.query(`SELECT b.*, a.name AS author_name
+            FROM books b
+            LEFT JOIN authors a ON a.id = b.author_id
+            WHERE user_id = ?`, [id]);
+      for (const book of rows) {
+        await this.book_process(book);
+      }
+      return rows;
+    } catch (err) {
+      console.error('Error:', err);
+      throw err;
+    }
+  }
+
+  async getBookByTitle(id) {
+    try {
+      const [rows] = await pool.query(
+            `SELECT b.*, a.name AS author_name
+            FROM books b
+            LEFT JOIN authors a ON a.id = b.author_id
+            WHERE title = ?`,
+            [id]
+      );
+      for (const book of rows) {
+        await this.book_process(book);
+      }
       return rows[0] || null;
     } catch (err) {
       console.error('Error:', err);
       throw err;
     }
+  }
+
+  async addBook(title, resume, author, user_id, have_picture, categorie, slug) {
+    try {
+        const [result] = await pool.query(
+          'INSERT INTO books (title, synopsis, state, author_id, user_id, have_picture, categorie, slug) VALUES (?, ?, "Disponible", ?, ?, ?, ?, ?)',
+          [title, resume, author, user_id, have_picture, categorie, slug]
+        );
+        return result.insertId;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+  }
+
+  async getBookBySlug(slug) {
+    const [rows] = await pool.query(
+      `SELECT b.*, a.name AS author_name
+      FROM books b
+      LEFT JOIN authors a ON a.id = b.author_id
+      WHERE b.slug = ?`,
+      [slug]
+    );
+    if (!rows[0]) return null;
+    this.book_process(rows[0])
+    return rows[0] ?? null;
+  }
+
+  async bookExists(slug) {
+    const [rows] = await pool.query('SELECT 1 FROM books WHERE slug = ? LIMIT 1', [slug]);
+    return rows.length > 0;
+  }
+
+  async generateUniqueSlug(title) {
+    const base = slugify(title);
+    let slug = base;
+    let i = 1;
+    while (await bookExists(slug)) {
+      slug = `${base}-${i++}`;
+    }
+    return slug;
   }
 }
 

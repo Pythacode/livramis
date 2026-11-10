@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/book.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <script src="/js/book.js" defer></script>
+    <title><%= book.title %> - Livramis</title>
+</head>
+<%- include('../partials/header') %>
+<body>
+    <div class="book detail">
+        <img class="couverture" src="<%= book.poster %>" alt="Couverture de <%= book.title %>">
+        <div  style="position : relative;width: 100%;">
+            <div>
+                <h2 class="title"><%= book.title %></h2>
+                <h3 class="author"><%= book.author_name %></h3>
+                <div class="button-top-right">
+                    <%
+                    if (user) {
+                        if (book.user_id == user.id || user.is_admin) {
+                            %>
+                            <a class="button" onclick="remove()">Suprimer</a>
+                            <%
+                        } if (!(book.user_id == user.id)) {
+                            %>
+                            <a class="button" onclick="reserve()">Reserver</a>
+                            <%
+                        }
+                    } else {
+                        %>
+                        <a class="button" onclick="reserve()">Se connecter pour reserver</a>
+                        <%
+                    }   
+                    %>
+                </div>
+            </div>
+            <hr>
+            <div class="infos">
+                    <h3 class="info">Type : <%= book.categorie %></h3>
+                    <h3  class="info">Disponibilité : <%= book.state %></h3>
+                    <h3  class="info">Propriétaire : <a class="no-opened" href="/user/<%= book.proprietaire %>"><%= book.proprietaire; %></a></h3>
+                    <h2>Synopsis :</h2>
+                    <div><%- book.synopsis %></div>
+            </div>
+        </div>
+    </div>
+    <div id="modal-overlay" class="modal-overlay" style="display: none;"></div>
+    <div id="modal-fenetre-reserve" class="modal-fenetre" style="display: none;">
+        <h1>Reservation en cours...</h1>
+        <img class="loading" src="<%= book.poster %>" alt="">
+    </div>
+    <div id="modal-fenetre-remove" class="modal-fenetre" style="display: none;">
+        <h1>Suprimer un livre</h1>
+        <h2 id="text" style="margin: 0;">Veut tu vraiment suprimer çe livre ?</h2>
+        <h3 id="sub-text" style="display:none;"></h3>
+        <div id="button-validate-delete" style="margin-top: 15px;">
+            <a class="button" onclick="remove_confirmed()">Oui</a>
+            <a class="button" onclick="closeModal('remove')">Non</a>
+        </div>
+        <img style="display:none;" id="loading-delete" class="loading" src="<?php echo $book["have_picture"] ? "./../books/".$book["id"]."/couverture.jpg" : "./../books/default/couverture.jpg"; ?>" alt="">
+        <a href="/" class="button" style="display:none;" id="home-button">Retour à l'aceuil</a>
+    </div>
+</body>
+</html>

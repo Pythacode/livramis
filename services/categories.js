@@ -1,6 +1,6 @@
 const pool = require('../config/database');
 
-class BookService {
+class CategoriesService {
   constructor(pool) {
     this.pool = pool
   }
@@ -30,7 +30,7 @@ class BookService {
   async getCategorieIdByName(name) {
     try {
       const [rows] = await pool.query('SELECT id FROM categories WHERE name = ?', [name]);
-      return rows[0] || null;
+      return rows[0]?.id || null;
     } catch (err) {
       console.error('Error:', err);
       throw err;
@@ -38,4 +38,4 @@ class BookService {
   }
 }
 
-module.exports = new BookService(pool);
+module.exports = new CategoriesService(pool);

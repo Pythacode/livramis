@@ -14,7 +14,7 @@
     transition-duration: 500ms;
 }
 
-.book:hover {
+.book:not(.detail):hover {
     transform: scale(1.05);
 }
 
@@ -74,4 +74,10 @@
 
 .book a {
     color: inherit;
+}
+
+.detail {
+    flex-direction: row;
+    height: initial;
+    gap: 5px;
 }

@@ -1,2 +1,7 @@
 node_modules
 .env
+
+/public/books/*
+!/public/books/default
+/public/users/*
+!/public/users/default

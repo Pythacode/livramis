@@ -11,7 +11,8 @@ module.exports = async (req, res, next) => {
 
 module.exports.requireAuth = (req, res, next) => {
   if (!req.session.userId) {
-    return res.redirect('/account/login');
+    req.session.returnTo = req.originalUrl;
+    return res.redirect('/login');
   }
   next();
 };

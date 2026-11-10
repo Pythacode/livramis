@@ -11,6 +11,7 @@ const auth = require('./middleware/auth');
 
 const indexRouter = require('./routes/index');
 const accountRouter = require('./routes/account');
+const bookRouter = require('./routes/book');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,6 +25,18 @@ app.set('views', './views');
 
 app.use('/', indexRouter);
 app.use('/', accountRouter);
+app.use('/book', bookRouter);
+
+app.use('/not-dev', async (req, res) => {
+  res.render('not-dev');
+});
+
+app.use((req, res) => {
+  if (!req.accepts('html')) {
+    return res.status(404).end();
+  }
+  res.status(404).render('404');
+});
 
 app.listen(port, () => {
   console.log(`Serveur listen on http://localhost:${port}`);

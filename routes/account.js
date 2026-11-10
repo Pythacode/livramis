@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const usersService = require('../services/users');
+const booksService = require('../services/books');
 const bcrypt = require('bcryptjs')
 const pool = require('../config/database')
 
@@ -30,7 +31,10 @@ router.post('/login', async (req, res) => {
   }
 
   req.session.userId = user.id;
-  res.redirect('/');
+
+  const redirectTo = req.session.returnTo?.startsWith('/') ? req.session.returnTo : '/';
+  delete req.session.returnTo;
+  res.redirect(redirectTo);
 });
 
 // GET /signin
@@ -55,7 +59,10 @@ router.post('/signin', async (req, res) => {
 
   const id = await usersService.create(username, first_name, last_name, email, password);
   req.session.userId = id;
-  res.redirect('/');
+  
+  const redirectTo = req.session.returnTo?.startsWith('/') ? req.session.returnTo : '/';
+  delete req.session.returnTo;
+  res.redirect(redirectTo);
 });
 
 // GET /logout
@@ -63,5 +70,19 @@ router.get('/logout', (req, res) => {
   req.session.destroy();
   res.redirect('/');
 });
+
+// GET /user/:username
+router.get('/user/:username', async (req, res) => {
+  const user = await usersService.findByUsername(req.params.username);
+  const books = await booksService.getBookByProprietaire(user.id)
+  console.log(user.id)
+
+  if (!user) {
+    return res.status(404).render('404');
+  }
+
+  res.render('account/profile', { profile: user, books: books });
+});
+
 
 module.exports = router;
